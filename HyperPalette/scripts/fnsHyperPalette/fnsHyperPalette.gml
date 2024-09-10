@@ -3,13 +3,13 @@
 //define macros
 #macro HYPERPAL_MAX_COLORS 32
 #macro HYPERPAL_MAX_PALETTES 7
-#macro HYPERPAL_COL_PAL0 c_white
-#macro HYPERPAL_COL_PAL1 c_red
-#macro HYPERPAL_COL_PAL2 c_lime
-#macro HYPERPAL_COL_PAL3 c_yellow
-#macro HYPERPAL_COL_PAL4 c_blue
-#macro HYPERPAL_COL_PAL5 c_fuchsia
-#macro HYPERPAL_COL_PAL6 c_aqua
+#macro HYPERPAL_COL_PAL0 c_red
+#macro HYPERPAL_COL_PAL1 c_lime
+#macro HYPERPAL_COL_PAL2 c_yellow
+#macro HYPERPAL_COL_PAL3 c_blue
+#macro HYPERPAL_COL_PAL4 c_fuchsia
+#macro HYPERPAL_COL_PAL5 c_aqua
+#macro HYPERPAL_COL_PAL6 c_white
 
 /// @description call this once at the beginning of your game to initialize hyperpalette - set <_rand> to true to make it initialize with a semi-randomized palette
 function hyperpalette_init(_rand = false)
@@ -50,7 +50,7 @@ function hyperpalette_init(_rand = false)
 /// @description change a color on the palette - nothing is preventing you from modifying them directly but hopefully this makes them simpler
 function hyperpalette_change_color(_new = #FFFFFF, _col = 0, _pal = 0)
 {
-	_pal = clamp(_pal, 0, (HYPERPAL_MAX_PALETTES - 1));
+	_pal = HYPERPAL_MAX_PALETTES - clamp(_pal, 0, (HYPERPAL_MAX_PALETTES - 1)) - 1;
 	_col = clamp(_col, 0, (HYPERPAL_MAX_COLORS - 1));
 	global.colorPaletteR[_col + (_pal * HYPERPAL_MAX_COLORS)] = (color_get_red(_new) / 255);
 	global.colorPaletteG[_col + (_pal * HYPERPAL_MAX_COLORS)] = (color_get_green(_new) / 255);
